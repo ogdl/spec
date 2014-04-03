@@ -56,14 +56,21 @@ EBNF:
     list  ::= list_start node (list_sep node)* list_sep? list_end
     value ::= string
 
-###Value
-While the format of list and link are syntax dependent, the format of value is
-shared between flow and block syntaxes.
+###Common definitions
+There are definitions common to both flow and block syntaxes:
 
     char_visible    ::= [^0..32]
     char_space      ::= [ \t]
     char_inline     ::= char_visible | char_space
     char_delimiter  ::= [{}(),:]
+    char_break      ::= [\r\n]
+    char_space      ::= [ \t] | char_break
+    new_line        ::= char_break | '\r\n'
+    EOF             ::= (end of file)
+
+###Value
+While the format of list and link are syntax dependent, the format of value is
+shared between flow and block syntaxes.
 
     quoted_char     ::= (char_inline - '"') | '\\"'
     quoted_string   ::= '"' quoted_char* '"'
@@ -91,17 +98,14 @@ Flow syntax
 -----------
 In addiction to the shared syntax:
 
-    new_line        ::= '\n'
     inline_comment  ::= '//' char_inline* (new_line | EOF)
     list_start      ::= '{'
     list_end        ::= '}'
     list_sep        ::= ','
 
 Notes:
-* A list is represented by a pair of curly braces with comma separated elements. 
-  The last child can be optionaly followed by a comma.
-* When a node has only one child, the curly braces can be omitted and it can be
-  represented as two consecutive nodes seperated by space.
+* An association link is represented by space characters char_space+, i.e. two
+  nodes separated by spaces are connected with an association link.
 
 Block syntax
 ------------
