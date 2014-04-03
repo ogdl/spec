@@ -21,6 +21,7 @@ references and types. It is easy to parse and is flexible enough to be extended
 to represent arbitrary data structures.
 
 OGDL has two distinct syntaxes sharing the same data model:
+
 1. Flow syntax: curly braces and comma separated syntax.
 2. Block syntax: space indented syntax.
 
@@ -38,24 +39,25 @@ Core
 ###Data Model
 The data model of OGDL is a tree of nodes composed of value, list and link:
 * There are two kinds of nodes: value and list.
-    - A value is a string.
-    - A list is an ordered container of nodes.
+    - A value is a string value.
+    - A list is an ordered list of nodes.
 * There are two kinds of links: composition and association.
     - A composition link is the link from a list to each of its element node.
     - An association link is the link from one node to another. A node can has
       at most one incoming and one outgoing association link.
-    - Both composition and association links are unidirection from parent to
+    - Both composition and association links are unidirectional: from parent to
       child.
 * When a list node has an association link to another node, the list node can be
   seen as a value encoded in the form of a list.
 
 EBNF:
+
     node  ::= (value | list) node?
     list  ::= list_start node (list_sep node)* list_sep? list_end
     value ::= string
 
 ###Value
-While the format of list and link is syntax dependent, the format of value is
+While the format of list and link are syntax dependent, the format of value is
 shared between flow and block syntaxes.
 
     char_visible    ::= [^0..32]
@@ -123,7 +125,8 @@ list.
 ###array
 An array is represented with a list of array elements.
 
-An integer array with 3 elements. 
+An integer array with 3 elements.
+
     Flow syntax:
         {1, 2, 3}
 
@@ -133,6 +136,7 @@ An integer array with 3 elements.
         3
 
 An array of integer array.
+
     Flow syntax:
         {{1, 2, 3}, {4, 5}, {6}}
     Block syntax:
@@ -152,6 +156,7 @@ as a key node, assotiated with an optional child node of colon that is then
 assotiated with a child node of the value.
 
 An object with two string fields.
+
     Flow syntax:
         {FieldX: "a", FieldY: "b"}
 
@@ -160,6 +165,7 @@ An object with two string fields.
         FieldY 2
 
 A map with string key and integer value.
+
     Flow syntax:
         {"a": 1, "b": 2}
     Block syntax:
@@ -167,6 +173,7 @@ A map with string key and integer value.
         "b" 2
 
 A map with struct key and boolean value.
+
     Flow syntax:
         {{FieldX: "a", FieldY: 1}: true, {FieldX: "b", FieldY: 2}: false}
     Block syntax:
@@ -198,6 +205,7 @@ Boolean value is an unquoted string of either true of false.
 
 ###Numeric value
 Numeric value is an unquoted string that encode a number.
+
     sign       ::= '+' | '-'
     decimal    ::= [0-9]
     decimals   ::= decimal+ 
@@ -220,12 +228,15 @@ Float value is an unquoted string that encode a floating point number:
 
 ###Date/time
 A date/time value is a quoted string encoded with RFC3339, e.g.
+
     "2006-01-02T15:04:05.999999999Z07:00"
 
 ###IP address
 An IPv4 address value is an unquoted string that encode an IPv4 address. e.g.
+
     74.125.19.99
 
 An IPv6 address value is a quoted string that encode an IPv6 address. e.g.
+
     "2001:4860:0:2001::68"
 
