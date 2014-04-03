@@ -1,6 +1,4 @@
 Specification of OGDL 2.0
 =========================
 
-Spec
-----
-[Spec](spec.md)
+Click here to view the specification: [Spec](spec.md)
