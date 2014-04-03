@@ -206,6 +206,8 @@ sequences.
 ###Boolean value
 Boolean value is an unquoted string of either true of false.
 
+    boolean    ::= 'true' | 'false'
+
 ###Numeric value
 Numeric value is an unquoted string that encode a number.
 
