@@ -33,6 +33,10 @@ In the following sections:
 * Extension: specifies how to extend OGDL core definitions and extentions of
   standard types.
 
+Notation
+--------
+The syntax is specified using [Extended Backus-Naur Form (EBNF)](http://standards.iso.org/ittf/PubliclyAvailableStandards/s026153_ISO_IEC_14977_1996(E).zip).
+
 Core
 ----
 ###Data Model
@@ -232,16 +236,19 @@ Float value is an unquoted string that encode a floating point number:
     complex    ::= sign? int_float sign int_float 'i'
 
 ###Date/time
-A date/time value is a quoted string encoded with RFC3339, e.g.
+A date/time value is a quoted string encoded with [RFC3339](http://www.ietf.org/rfc/rfc3339.txt), e.g.
 
     "2006-01-02T15:04:05.999999999Z07:00"
 
 ###IP address
-An IPv4 address value is an unquoted string that encode an IPv4 address. e.g.
+    ip         ::= ipv4 | ipv6
+    ipv4       ::= decimals '.' decimals '.' decimals '.' decimals
+    ipv6       ::= 
 
-    74.125.19.99
+Example:
 
-An IPv6 address value is a quoted string that encode an IPv6 address. e.g.
-
-    "2001:4860:0:2001::68"
+    IPv4
+        74.125.19.99
+    IPv6
+        "2001:4860:0:2001::68"
 
