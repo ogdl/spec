@@ -35,7 +35,7 @@ In the following sections:
 
 Notation
 --------
-The syntax is specified using [Extended Backus-Naur Form (EBNF)](http://standards.iso.org/ittf/PubliclyAvailableStandards/s026153_ISO_IEC_14977_1996(E).zip).
+The syntax is specified using [W3C XML Extended Backus-Naur Form (EBNF)](http://www.w3.org/TR/2006/REC-xml11-20060816/#sec-notation).
 
 Core
 ----
