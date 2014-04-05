@@ -32,7 +32,7 @@ The specification is structured as below:
         - Flow syntax: curly braces and comma separated syntax.
         - Block syntax: space indented syntax.
 * Extensions
-    + Representations of common data types/structures.
+    + Representations of common data types.
 
 Notation
 --------
@@ -40,18 +40,13 @@ The syntax is specified using a variant of Extended Backus-Naur Form (EBNF),
 based on [W3C XML EBNF](http://www.w3.org/TR/2006/REC-xml11-20060816/#sec-notation).
 
 The W3C XML EBNF notation is extended with the following definitions:
-* U+XXXX
-  matches Unicode code point 0xXXXX.
-* EOF
-  matches the end of the file.
-* A{n}
-  matches exactly n occurrences of A.
-* A{,m}
-  matches zero to m occurrences of A.
-* A{n,}
-  matches n or more than n occurrences of A.
-* A{n,m}
-  matches n to m occurrences of A.
+* **U+XXXX** matches Unicode code point 0xXXXX.
+* **EOF** matches the end of the file.
+* **A{n}** matches exactly n occurrences of A.
+* **A{,m}** matches zero to m occurrences of A.
+* **A{n,}** matches n or more than n occurrences of A.
+* **A{n,m}** matches n to m occurrences of A.
+
 Core
 ----
 ###Data Model
@@ -65,6 +60,8 @@ The data model of OGDL is a tree of nodes composed of value, list and link:
       at most one incoming and one outgoing association link.
     - Both composition and association links are unidirectional: from the parent
       to the child.
+
+Parser EBNF:
 
     node  ::= (value | list) node?
     list  ::= list_start (node (list_sep node)* list_sep?)? list_end
@@ -220,9 +217,6 @@ A map with struct key and boolean value.
     Block syntax:
         (FieldX "a", FieldY 1) true
         (FieldX "b", FieldY 2) false
-
-Note:
-* colon is optional for both flow and block syntax.
 
 ###Interpreted string
 Interpreted string is a double quoted string, that can interpret certain escape
