@@ -147,11 +147,11 @@ Extensions
 ----------
 Core definitions only include value, list, link, cyclic reference and type name.
 Format for other data structures can be extended with these premitives. An OGDL
-implementation should provide implementation specific way for users to define
+implementation should provide implementation specific API for users to define
 the format of their own types.
 
 In this specification, format for common types are specified. These types are
-intended to be mapped to builtin types or types in standard libraries, and
+intended to be mapped to builtin types or types in the standard libraries, and
 format of these types are fixed and cannot be overriden.
 
 ###nil
