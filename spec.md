@@ -15,31 +15,28 @@ Introduction
 OGDL (Ordered Graph Data Language) is a simple, extensible, text-based data
 serialization format.
 
+The data model of OGDL is a tree of string nodes. It is simple but flexible
+enough to be extended to represent a rich set of data structures, including
+cyclic graphs and application-defined types.
+
 OGDL has two syntax styles: flow and block. They share the same data model and
 extensions, but cannot be mixedly used.
 
 The specification is structured as below:
 * Core
     + Data model
-        - The data model of OGDL is a tree of string nodes. It is simple but
-          flexible enough to be extended to represent a rich set of data
-          structures.
     + Common syntax
-        - Basic format
-        - Cyclic node
-        - Typed node
     + Two syntax styles
-        - Flow syntax: curly braces and comma separated syntax.
-        - Block syntax: space indented syntax.
+        - Flow syntax
+        - Block syntax
 * Extensions
     + Representations of common data types.
 
 Notation
 --------
 The syntax is specified using a variant of Extended Backus-Naur Form (EBNF),
-based on [W3C XML EBNF](http://www.w3.org/TR/2006/REC-xml11-20060816/#sec-notation).
-
-The W3C XML EBNF notation is extended with the following definitions:
+based on [W3C XML EBNF](http://www.w3.org/TR/2006/REC-xml11-20060816/#sec-notation),
+which is extended with the following definitions:
 * **U+XXXX** matches Unicode code point 0xXXXX.
 * **EOF** matches the end of the file.
 * **A{n}** matches exactly n occurrences of A.
@@ -68,17 +65,17 @@ Parser EBNF:
     value ::= string
 
 Note:
-* When a list node has an association link to another node, the list node can be
-  seen as a value encoded in the form of a list.
 * Two node connected by an association link is represented by two consecutive
   nodes.
+* When a list node has an association link to another node, the list node can be
+  seen as a value encoded in the form of a list.
 
 ###Common syntax
 
 An OGDL text is a sequence of [Unicode](http://unicode.org/) code points encoded
 in UTF8.
 
-Beside \t (U+0009), \n (U+000A), \r (U+000D), code points less than U+0032 are
+Except \t (U+0009), \n (U+000A) and \r (U+000D), code points less than U+0032 are
 invalid and should not appear in an OGDL text.
 
     char_visible    ::= [^0..32]
@@ -89,12 +86,12 @@ invalid and should not appear in an OGDL text.
     char_any        ::= char_inline | char_break
     char_invalid    ::= ^char_any
 
-New line could either be \r, \n or \r\n.
+Line ending (newline) could either be \r, \n or \r\n.
 
-    new_line        ::= char_break | '\r\n'
+    newline         ::= char_break | '\r\n'
 
-While the format of list and link are syntax dependent, the format of string
-value is shared between flow and block syntaxes.
+While the format of list is syntax dependent, the format of string value is
+shared between flow and block syntaxes.
 
     char_delimiter  ::= [{}(),]
     quoted_char     ::= (char_inline - '"') | '\\"'
@@ -103,15 +100,16 @@ value is shared between flow and block syntaxes.
     unquoted_string ::= unquoted_char+
     string          ::= unquoted_string | quoted_string
 
-OGDL can represent a graph by reference IDs. A cyclic reference id is an
-unquoted string in the form ^id, where id is a unique ID within an OGDL file.
+OGDL can represent a cyclic graph by using reference IDs. A cyclic reference id
+is an unquoted string in the form ^id, where id is a unique ID within an OGDL
+file.
 
 A referenced node is defined as the only child (descendant) of the reference id,
 linked by an association link. It can be referenced by the reference id alone.
 It should be defined only once but can be referenced multiple times.
 
     ref_id          ::= '^' unquoted_char+
-    ref_node        ::= ref_id node
+    referenced_node ::= ref_id node
 
 A type is an unquoted string in the form !type. A typed node is defined as the
 only child (descendant) of the type, linked by an association link. 
@@ -128,24 +126,26 @@ matter which comes first. e.g.
         type ref_id node
 
 ###Flow syntax
-In addiction to the shared syntax:
+Flow syntax style is a curly braces and comma separated syntax.
 
-    inline_comment  ::= '//' char_inline* (new_line | EOF)
+    inline_comment  ::= '//' char_inline* (newline | EOF)
     list_start      ::= '{'
     list_end        ::= '}'
     list_sep        ::= ','
 
 ###Block syntax
-TODO
+Block syntax style is a line-based, space indented syntax.
+
+**TODO**
 
 Extensions
 ----------
-Core definitions only contain value, list, link, cyclic reference and type name.
+Core definitions only include value, list, link, cyclic reference and type name.
 Format for other data structures can be extended with these premitives. An OGDL
 implementation should provide implementation specific way for users to define
 the format of their own types.
 
-In this specification, format for certain types are specified. These types are
+In this specification, format for common types are specified. These types are
 intended to be mapped to builtin types or types in standard libraries, and
 format of these types are fixed and cannot be overriden.
 
