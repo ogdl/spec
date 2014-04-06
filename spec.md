@@ -191,7 +191,8 @@ An map is represented with a list of key-value pairs. Each pair is represented
 as a key node, assotiated with a child node of the value.
 
     key_value       ::= node node
-    map             ::= list
+    key_value_list  ::= list_start (key_value (list_sep key_value)* list_sep?)? list_end
+    map             ::= key_value_list
 
 An object with two string fields.
 
@@ -268,7 +269,11 @@ Float value is an unquoted string that encode a floating point number:
 
 ###Date/time
 A date/time value is an unquoted string encoded with
-[RFC3339](http://www.rfc-editor.org/rfc/rfc3339.txt), e.g.
+[RFC3339](http://www.rfc-editor.org/rfc/rfc3339.txt)
+
+    date_time  ::= rfc3339_date_time
+
+e.g.
 
     2006-01-02T15:04:05.999999999Z07:00
 
@@ -286,7 +291,11 @@ e.g.
     74.125.19.99
 
 An IPv6 address value is an unquoted string encoded with
-[RFC5952](http://www.rfc-editor.org/rfc/rfc5952.txt), e.g.
+[RFC5952](http://www.rfc-editor.org/rfc/rfc5952.txt).
+
+    ipv6       ::= rfc5952_ipv6_address
+
+e.g.
 
     2001:4860:0:2001::68
 
