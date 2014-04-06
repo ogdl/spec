@@ -234,12 +234,12 @@ Escape sequences:
 
     \a    U+0007 alert or bell
     \b    U+0008 backspace
-    \f    U+000C form feed
-    \n    U+000A line feed or newline
-    \r    U+000D carriage return
     \t    U+0009 horizontal tab
-    \v    U+000b vertical tab
-    \\    U+005c backslash
+    \n    U+000A line feed or newline
+    \v    U+000B vertical tab
+    \f    U+000C form feed
+    \r    U+000D carriage return
+    \\    U+005C backslash
     \"    U+0022 double quote
     \x    Unicode code point represented with two hexadecimal digits followed by \x
     \u    Unicode code point represented with exactly 4 hexadecimal digits followed by \u
