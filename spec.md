@@ -85,6 +85,7 @@ invalid and should not appear in an OGDL text.
     char_space      ::= [ \t] | char_break
     char_any        ::= char_inline | char_break
     char_invalid    ::= ^char_any
+    invalid_token   ::= char_invalid+
 
 Line ending (newline) could either be \r, \n or \r\n.
 
@@ -128,10 +129,14 @@ matter which comes first. e.g.
 ###Flow syntax
 Flow syntax style is a curly braces and comma separated syntax.
 
+Scanner ENBF for flow syntax:
+
     inline_comment  ::= '//' char_inline* (newline | EOF)
     list_start      ::= '{'
     list_end        ::= '}'
     list_sep        ::= ','
+    spaces          ::= char_space+
+    token           ::= invalid_token | inline_comment | list_start | list_sep | list_end | string | spaces
 
 ###Block syntax
 Block syntax style is a line-based, space indented syntax.
