@@ -42,6 +42,7 @@ which is extended with the following definitions:
 * **A{,m}** matches zero to m occurrences of A.
 * **A{n,}** matches n or more than n occurrences of A.
 * **A{n,m}** matches n to m occurrences of A.
+* **Escape sequences** defined in section [Interpreted string](#interpreted-string).
 
 Core
 ----
@@ -240,9 +241,9 @@ Escape sequences:
     \v    U+000b vertical tab
     \\    U+005c backslash
     \"    U+0022 double quote
-    \x    value of two hexadecimal digits followed by \x
-    \u    value of exactly 4 hexadecimal digits followed by \u
-    \U    value of exactly 8 hexadecimal digits followed by \U
+    \x    Unicode code point represented with two hexadecimal digits followed by \x
+    \u    Unicode code point represented with exactly 4 hexadecimal digits followed by \u
+    \U    Unicode code point represented with exactly 8 hexadecimal digits followed by \U
 
 ###Boolean value
 Boolean value is an unquoted string of either true of false.
