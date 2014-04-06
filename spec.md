@@ -37,7 +37,6 @@ Notation
 The syntax is specified using a variant of Extended Backus-Naur Form (EBNF),
 based on [W3C XML EBNF](http://www.w3.org/TR/2006/REC-xml11-20060816/#sec-notation),
 which is extended with the following definitions:
-* **U+XXXX** matches Unicode code point 0xXXXX.
 * **EOF** matches the end of the file.
 * **A{n}** matches exactly n occurrences of A.
 * **A{,m}** matches zero to m occurrences of A.
@@ -78,7 +77,7 @@ in UTF8.
 Except \t (U+0009), \n (U+000A) and \r (U+000D), code points less than U+0032 are
 invalid and should not appear in an OGDL text.
 
-    char_visible    ::= [^0..32]
+    char_visible    ::= [^#x00-#x20]
     char_space      ::= [ \t]
     char_inline     ::= char_visible | char_space
     char_break      ::= [\r\n]
