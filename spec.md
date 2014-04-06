@@ -73,7 +73,7 @@ Note:
 ###Common syntax
 
 An OGDL text is a sequence of [Unicode](http://unicode.org/) code points encoded
-in UTF8.
+in [UTF-8](http://www.unicode.org/versions/Unicode6.2.0/ch03.pdf).
 
 Except \t (U+0009), \n (U+000A) and \r (U+000D), code points less than U+0032 are
 invalid and should not appear in an OGDL text.
